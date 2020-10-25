@@ -1,0 +1,41 @@
+﻿@using MyCommerce.ViewModels
+@using MyCommerce.Models
+@model Sepet
+
+@{
+    ViewBag.Title = "Sepet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["sepettemi"]!=null)
+{
+    int sayac = 0;
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Sıra</th>
+                <th>Resim</th>
+                <th>Adı</th>
+                <th>Fiyat</th>
+                <th>Adet</th>
+            </tr>
+        </thead>
+
+        @foreach (SepetUrunu item in Model.urunler)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@(sayac++)</th>
+                    <td><img src="~/images/@(item.Urun.UrunAdi).jpg" width="100" height="100"/></td>
+                    <td>@item.Urun.UrunAdi</td>
+                    <td>@(Math.Round((decimal)item.Urun.BirimFiyati,2).ToString("C2"))</td>
+                    <td>@item.Adet</td>
+                </tr>
+            </tbody>
+            
+        }
+
+
+    </table>
+}
